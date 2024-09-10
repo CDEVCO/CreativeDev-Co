@@ -10,7 +10,9 @@
     'depends': ['base', 'stock'],
     'data': [
         'views/view_stock_picking.xml',
+        'views/view_product_template.xml',
         'report/report_stock_picking_template.xml',
+
     ],
     'demo': [],
     'installable': True,
