@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Add New Button under Action Menu -->
+        <record id="action_so_batch_syncing" model="ir.actions.server" >
+            <field name="name">SO Sync</field>
+            <field name="model_id" ref="sale_management.model_sale_order"/>
+            <field name="binding_model_id" ref="sale_management.model_sale_order" />
+            <field name="state">code</field>
+            <field name="code">
+                action = records.so_batch_sync()
+            </field>
+        </record>
+    </data>
+</odoo>

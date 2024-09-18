@@ -7,10 +7,12 @@
     'website': '',
     'category': '',
     'version': '17.0',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'sale', 'product', 'sale_management', 'mail'],
     'data': [
         'views/view_portal_connection.xml',
         'security/ir.model.access.csv',
+        'views/view_sale_order.xml',
+        'views/view_product.xml',
     ],
     'demo': [],
     'installable': True,

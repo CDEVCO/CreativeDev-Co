@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_template_sap_form" model="ir.ui.view">
+            <field name="name">product.template.sap.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='general_information']" position="after">
+                    <page name="sap_products" invisible="is_sap != True" string="SAP Products" >
+                        <group>
+                            <group>
+                                <field name="is_sap" string="Is SAP"/>
+                                <field name="sap_item_name" string="Item Name"/>
+                                <field name="sap_barcode" string="SAP Barcode"/>
+                                <field name="sap_material_code" string="Material Code"/>
+                                <field name="sap_material_group_1" string="Material Group1"/>
+                                <field name="sap_material_group_2" string="Material Group2"/>
+                                <field name="sap_material_group_3" string="Material Group3"/>
+                                <field name="sap_sale_price" string="Sale Price"/>
+                                <field name="sap_unit" string="Unit"/>
+                                <field name="sap_vn" string="V/N"/>
+                                <field name="sap_vendor_code" string="Vendor Code"/>
+                                <field name="sap_est_cost" string="EstCost"/>
+                            </group>
+                            <group>
+                                <field name="sap_unit1" string="Unit1"/>
+                                <field name="sap_unit1_qty" string="Unit1Qty"/>
+                                <field name="sap_unit1_price" string="Unit1Price"/>
+                                <field name="sap_unit1_barcode" string="Unit1Barcode"/>
+                                <field name="sap_unit2" string="Unit2"/>
+                                <field name="sap_unit2_qty" string="Unit2Qty"/>
+                                <field name="sap_unit2_price" string="Unit2Price"/>
+                                <field name="sap_unit2_barcode" string="Unit2Barcode"/>
+                                <field name="sap_unit3" string="Unit3"/>
+                                <field name="sap_unit3_qty" string="Unit3Qty"/>
+                                <field name="sap_unit3_price" string="Unit3Price"/>
+                                <field name="sap_unit3_barcode" string="Unit3Barcode"/>
+                                <field name="sap_est_cost" string="EstCost"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add New Button under Action Menu -->
+        <record id="action_products_syncing" model="ir.actions.server" >
+            <field name="name">Products Sync</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="binding_model_id" ref="product.model_product_template" />
+            <field name="state">code</field>
+            <field name="code">
+                action = records.sap_products_sync()
+            </field>
+        </record>
+    </data>
+</odoo>

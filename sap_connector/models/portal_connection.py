@@ -1,4 +1,3 @@
-from xmlrpc import client
 from odoo import models, fields, api, _
 import requests
 from requests.auth import HTTPBasicAuth
@@ -24,6 +23,8 @@ class sap_connection(models.Model):
             password = self.password
             response = requests.post(url + '/auth/token', json=data, headers=headers, auth=HTTPBasicAuth(username, password))
             data = response.json()
+            # import pdb
+            # pdb.set_trace()
             if data:
                 self.token = data.get('token')
                 self.expire_time = data.get('expire')
@@ -46,6 +47,20 @@ class sap_connection(models.Model):
                     'res_id': message_id.id,
                     'target': 'new'
                 }
+
+    def get_sap_products(self):
+        gg = True
+        url = "https://uat-apigw-sap.starzth.com"
+        data = {
+            'data':'14082024'
+        }
+        headers = {
+            'Authorization': 'Bearer %s' + self.token,
+            'Content-Type': 'application/json'
+        }
+        response = requests.get(url + '/erp-sap/master/material', json=data, headers=headers)
+
+        return True
 
 class MessageWizard(models.TransientModel):
     _name = 'message.wizard'
