@@ -49,7 +49,9 @@ class sap_connection(models.Model):
                 }
 
     def get_sap_products(self):
-        gg = True
+        # gg = True
+        write_true = False
+        product_obj = self.env['product.template']
         url = "https://uat-apigw-sap.starzth.com"
         data = {
             'data':'14082024'
@@ -59,7 +61,87 @@ class sap_connection(models.Model):
             'Content-Type': 'application/json'
         }
         response = requests.get(url + '/erp-sap/master/material', json=data, headers=headers)
-
+        sap_data = response.json()
+        if sap_data.get('result'):
+            for sap_d in sap_data.get('result'):
+                # material_code = sap_data.get('materialCode')
+                material_code = 'abc'
+                product_id = product_obj.search([('sap_material_code','=',material_code)])
+                if product_id:
+                    write_true = product_id.write(
+                        {
+                            "sap_material_code": "8850123456789",
+                            "sap_barcode": "8850123456789",
+                            "sap_item_name": "คานาแกน อาหารแมว1 สตรไกฟรเรนจ(50g.)",
+                            "sap_material_group_1": "อาหารแมว",
+                            "sap_material_group_2": "Canagan",
+                            "sap_material_group_3": 49.00,
+                            "sap_sale_price": None,
+                            "sap_unit": "V",
+                            "sap_vn": "",
+                            "sap_vendor_code": "PS650123",
+                            "sap_unit1": "แพค",
+                            "sap_unit1_qty": 3.00,
+                            "sap_unit1_price": 140.00,
+                            "sap_unit1_barcode": "88501234567893",
+                            "sap_unit2": "โหล",
+                            "sap_unit2_qty": 12.00,
+                            "sap_unit2_price": 550.00,
+                            "sap_unit2_barcode": "885012345678912",
+                            "sap_unit3": "ลง",
+                            "sap_unit3_qty": 60.00,
+                            "sap_unit3_price": 2500.00,
+                            "sap_unit3_barcode": "885012345678960",
+                            "sap_est_cost": 20.00
+                        }
+                    )
+                else:
+                    product_obj.create(
+                        {
+                    "sap_material_code": "8850123456789",
+                    "sap_barcode": "8850123456789",
+                    "sap_item_name": "คานาแกน อาหารแมว1 สตรไกฟรเรนจ(50g.)",
+                    "sap_material_group_1": "อาหารแมว",
+                    "sap_material_group_2": "Canagan",
+                    "sap_material_group_3": 49.00,
+                    "sap_sale_price": None,
+                    "sap_unit": "V",
+                    "sap_vn": "",
+                    "sap_vendor_code": "PS650123",
+                    "sap_unit1": "แพค",
+                    "sap_unit1_qty": 3.00,
+                    "sap_unit1_price": 140.00,
+                    "sap_unit1_barcode": "88501234567893",
+                    "sap_unit2": "โหล",
+                    "sap_unit2_qty": 12.00,
+                    "sap_unit2_price": 550.00,
+                    "sap_unit2_barcode": "885012345678912",
+                    "sap_unit3": "ลง",
+                    "sap_unit3_qty": 60.00,
+                    "sap_unit3_price": 2500.00,
+                    "sap_unit3_barcode": "885012345678960",
+                    "sap_est_cost": 20.00
+                })
+            if write_true:
+                message_id = self.env['message.wizard'].create({'message': 'Products Update Success !'})
+                return {
+                    'name': 'Message',
+                    'type': 'ir.actions.act_window',
+                    'view_mode': 'form',
+                    'res_model': 'message.wizard',
+                    'res_id': message_id.id,
+                    'target': 'new'
+                }
+            else:
+                message_id = self.env['message.wizard'].create({'message': 'Connection Fail !'})
+                return {
+                    'name': 'Message',
+                    'type': 'ir.actions.act_window',
+                    'view_mode': 'form',
+                    'res_model': 'message.wizard',
+                    'res_id': message_id.id,
+                    'target': 'new'
+                }
         return True
 
 class MessageWizard(models.TransientModel):
