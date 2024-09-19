@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record model='ir.ui.view' id='product_template_inherit_form_view2'>
+            <field name='name'>product.template.form.inherit2.view</field>
+            <field name='model'>product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name='arch' type='xml'>
+                <xpath expr="//page[@name='general_information']" position="after">
+                    <page name="pet_products" string="Pet Products" >
+                        <group>
+                            <group>
+                                <field name="import_type" string="Import Type"/>
+                                <field name="brand_id" string="Brand"/>
+                                <field name="country_id" string="Country"/>
+                                <field name="animal_id" string="Animal"/>
+                                <field name="division_id" string="Division"/>
+                                <field name="categ_id" string="Department"/>
+                                <field name="url" string="Website Link"/>
+                                <field name="pet_all" string="Pet All"/>
+                                <field name="gp_percent" string="GP %"/>
+                            </group>
+                            <group>
+                                <field name="web_selling_price" string="Webisite Selling Price"/>
+                                <field name="b2b_price" string="B2B Price"/>
+                                <field name="discount_percent" string="Discount %"/>
+                                <field name="exchange_rate" string="Exchange Rate"/>
+                                <field name="selling_price_convert_thai_baht" string="Convert Thai Baht Price"/>
+                                <field name="convert_b2b_price" string="Convert B2B Price"/>
+                                <field name="benchmark_price" string="Benchmark Price"/>
+                                <field name="benchmark_Product" string="Benchmark Product"/>
+                                <field name="moq" string="MOQ"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

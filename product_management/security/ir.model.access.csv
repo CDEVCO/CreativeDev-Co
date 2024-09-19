@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_country_division,Access Country Division,model_res_country_division,base.group_user,1,1,1,1
+access_product_data_animal,Access Product Data Animal,model_product_data_animal,base.group_user,1,1,1,1
