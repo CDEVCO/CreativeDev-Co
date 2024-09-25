@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payment_provider_kasikorn" model="payment.provider">
+        <field name="name">Kasikorn Provider</field>
+        <field name="image_128" type="base64" file="payment_kasikorn_bank/static/description/icon.png"/>
+        <field name="module_id" ref="base.module_payment_kasikorn_bank"/>
+        <field name="inline_form_view_id" ref="inline_form"/>
+    </record>
+
+</odoo>
