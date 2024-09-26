@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="view_material_consumption_tree" model="ir.ui.view">
+            <field name="name">view.material.consumption.tree</field>
+            <field name="model">material.consumption</field>
+            <field name="arch" type="xml">
+                <tree string="Material Consumption">
+                    <field name="name"/>
+                    <field name="recipe_product_id"/>
+                    <field name="accounting_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='view_material_consumption_form' model='ir.ui.view'>
+            <field name='name'>view.material.consumption.form</field>
+            <field name='model'>material.consumption</field>
+            <field name='arch' type='xml'>
+                <form string="Material Consumption">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="opened,closing_control,closed" nolabel="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="show_dump" class="oe_stat_button" type="object" icon="fa-star">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Consumption</span>
+                                </div>
+                            </button>
+                        </div>
+                        <h1 class="oe_title">
+                            <field name="name" invisible="name == '/'" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <field name="recipe_line_product_ids" widget="many2many_tags"/>
+                            <field name="recipe_product_id"/>
+                        </group>
+                        <group>
+                            <field name="accounting_date"/>
+                            <field name="pos_order_id"/>
+                            <field name="pos_session_id"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="activity_ids"/>
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_material_consumption" model="ir.actions.act_window">
+            <field name="name">Action Material Consumption</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">material.consumption</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_material_consumption_tree"/>
+        </record>
+
+    </data>
+</odoo>
