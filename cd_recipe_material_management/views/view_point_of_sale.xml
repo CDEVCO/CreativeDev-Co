@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="view_pos_session_form_custom_buttons" model="ir.ui.view">
+            <field name="name">pos.session.form.custom.buttons</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button name="show_material_consumption" class="oe_stat_button" type="object" icon="fa-star">
+                        <div class="o_stat_info">
+                            <span class="o_stat_text">Consumption</span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
