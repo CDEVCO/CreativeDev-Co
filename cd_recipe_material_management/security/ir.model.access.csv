@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_recipe_lines,Access Product Recipe Lines,model_product_recipe_lines,base.group_user,1,1,1,1
+access_product_wizard,Access Product Wizard,model_product_wizard,base.group_user,1,1,1,1
+access_product_wizard.line,Access Product Wizard.line,model_product_wizard_line,base.group_user,1,1,1,1
+

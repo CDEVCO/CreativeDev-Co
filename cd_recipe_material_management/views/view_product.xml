@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <!--Product Inherited-->
+        <record id='product_template_form_view_inherited' model='ir.ui.view'>
+            <field name='name'>product.template.form.view.inherited</field>
+            <field name='model'>product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name='arch' type='xml'>
+                <xpath expr="//label[@for='purchase_ok']" position="after">
+                    <field name="is_recipe" string="Is Recipe"/>
+                    <label for="is_recipe"/>
+                </xpath>
+                <xpath expr="//page[@name='purchase']" position="after">
+                    <page string="Recipe Structure" name="recipe_structure">
+                        <field name="recipe_product_ids" widget="section_and_note_one2many" mode="tree">
+                            <tree string="Recipe Product Lines" editable="bottom">
+                                <field name="recipe_product_id" string="Product"/>
+                                <field name="location_id" string="Location"/>
+                                <field name="qty_consumed" string="Quantities"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!--Recipe Structure Form-->
+        <record id='product_recipe_structure_lines_form' model='ir.ui.view'>
+            <field name='name'>product.recipe.lines.form</field>
+            <field name='model'>product.recipe.lines</field>
+            <field name='arch' type='xml'>
+                <form string="Recipe Structure">
+                    <sheet name="Recipe Structure">
+                        <group>
+                            <group>
+                                <field name="recipe_product_id" string="Recipe Product"/>
+                                <field name="location_id" string="Location"/>
+                                <field name="qty_consumed" string="Quantities"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Recipe Structure Tree-->
+        <record id="product_recipe__structure_lines_tree" model="ir.ui.view">
+            <field name="name">product.recipe.lines.tree</field>
+            <field name="model">product.recipe.lines</field>
+            <field name="arch" type="xml">
+                <tree string="Recipe Structure">
+                    <field name="recipe_product_id" string="Recipe Product"/>
+                    <field name="location_id" string="Location"/>
+                    <field name="qty_consumed" string="Quantities"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Group By functionality -->
+        <record id="product_recipe__structure_lines_search" model="ir.ui.view">
+            <field name="name">product.recipe.lines.search</field>
+            <field name="model">product.recipe.lines</field>
+            <field name="arch" type="xml">
+                <search>
+                    <group expand="1" string="Group By">
+                        <filter string="Recipe Product" name="recipe_product_group_by" context="{'group_by':'recipe_product_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--Recipe Structure Action-->
+        <record id="product_recipe__structure_lines_action" model="ir.actions.act_window">
+            <field name="name">Recipe Strcture</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.recipe.lines</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="product_recipe__structure_lines_tree"/>
+        </record>
+
+        <!--Wizard Form-->
+        <record id='view_wizard_form' model='ir.ui.view'>
+            <field name='name'>product.wizard.form</field>
+            <field name='model'>product.wizard</field>
+            <field name='arch' type='xml'>
+                <form string="Recipe Structure">
+                    <sheet name="Recipe Structure">
+                        <group>
+                            <field name="wizard_recipe_id" style="width:50%"/>
+                        </group>
+                        <notebook>
+                            <page name="wizard_product" string="Recipe Product">
+                                <field name="wizard_recipe_line_ids" widget="section_and_note_one2many" mode="tree">
+                                    <tree string="Recipe Product Lines" editable="bottom">
+                                        <field name="wizard_line_product_id" string="Product"/>
+                                        <field name="wizard_line_location_id" string="Location"/>
+                                        <field name="wizard_line_qty_consumed" string="Quantities"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <footer>
+                        <button string="Confirm" type="object" name="action_confirm" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--Update Wizard-->
+        <record id="action_update_recipe_products" model="ir.actions.act_window">
+            <field name="name">Update Recipe Product</field>
+            <field name="res_model">product.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <!--Menu-->
+        <menuitem id="recipe_menu" name="Recipe Management" parent="stock.menu_stock_root" sequence="2">
+            <menuitem id="menu_stock_products" name="Products" sequence="1">
+                <menuitem id="menu_stock_recipe_products" name="Recipe Product" action="product.product_template_action" sequence="1"/>
+            </menuitem>
+            <menuitem id="menu_consumptions" name="Consumptions" sequence="2">
+                <menuitem id="menu_material_consumptions" name="Material Consumptions" sequence="1"/>
+            </menuitem>
+            <menuitem id="menu_recipe_operations" name="Operations" sequence="2">
+                <menuitem id="menu_update_recipe_products" name="Update Recipe Products" action="action_update_recipe_products" sequence="1"/>
+                <menuitem id="menu_recipe_structure_line" name="Recipe Structure" action="product_recipe__structure_lines_action" sequence="2"/>
+            </menuitem>
+        </menuitem>
+    </data>
+</odoo>
