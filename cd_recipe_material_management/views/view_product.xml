@@ -65,14 +65,14 @@
             <field name="arch" type="xml">
                 <search>
                     <group expand="1" string="Group By">
-                        <filter string="Recipe Product" name="recipe_product_group_by" context="{'group_by':'recipe_product_id'}"/>
+                        <filter string="Recipe Product" name="recipe_product_group_by" context="{'group_by':'product_tmpl_id'}"/>
                     </group>
                 </search>
             </field>
         </record>
 
         <!--Recipe Structure Action-->
-        <record id="product_recipe__structure_lines_action" model="ir.actions.act_window">
+        <record id="product_recipe_structure_lines_action" model="ir.actions.act_window">
             <field name="name">Recipe Strcture</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">product.recipe.lines</field>
@@ -125,11 +125,11 @@
                 <menuitem id="menu_stock_recipe_products" name="Recipe Product" action="product.product_template_action" sequence="1"/>
             </menuitem>
             <menuitem id="menu_consumptions" name="Consumptions" sequence="2">
-                <menuitem id="menu_material_consumptions" name="Material Consumptions" sequence="1"/>
+                <menuitem id="menu_material_consumptions" action="action_material_consumption" name="Material Consumptions" sequence="1"/>
             </menuitem>
             <menuitem id="menu_recipe_operations" name="Operations" sequence="2">
                 <menuitem id="menu_update_recipe_products" name="Update Recipe Products" action="action_update_recipe_products" sequence="1"/>
-                <menuitem id="menu_recipe_structure_line" name="Recipe Structure" action="product_recipe__structure_lines_action" sequence="2"/>
+                <menuitem id="menu_recipe_structure_line" name="Recipe Structure" action="product_recipe_structure_lines_action" sequence="2"/>
             </menuitem>
         </menuitem>
     </data>
