@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="report_account_invoice_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <t t-set="address" t-value="None"/>
+                    <div class="page">
+                        <!-- Title -->
+                        <h2 style="text-align: center;">ใบกำกับภาษี</h2>
+
+                        <!-- Invoice Information -->
+
+                        <div class="row mt32 mb32">
+                            <div class="col-auto" name="div_origin" style="margin-right: 20px;"> <!-- Reduced margin-right -->
+                                <strong>ออกให้:</strong><br/>
+                                ชื่อผู้ขาย:
+                                <span t-esc="o.partner_id.name"/><br/>
+                                ที่อยู่ผู้ขาย:
+                                <span t-esc="o.partner_id.street or ''"/>,
+                                <span t-esc="o.partner_id.street2 or ''"/>,
+                                <span t-esc="o.partner_id.city or ''"/>,<br/>
+                                <span t-esc="o.partner_id.state_id.name or ''"/>,
+                                <span t-esc="o.partner_id.zip or ''"/>,
+                                <span t-esc="o.partner_id.country_id.name or ''"/><br/>
+                                เลขประจำตัวผู้เสียภาษี:
+                                <span t-esc="o.partner_id.phone"/>
+                            </div>
+                            <div class="col-auto" name="div_invoice_info" style="text-align: left;">
+                                <span><strong>วันที่ออก:</strong> <span t-esc="o.invoice_date"/></span><br/>
+                                <span><strong>เลขที่ใบกำกับภาษี:</strong> <span t-esc="o.name"/></span><br/>
+                                <span><strong>เลขที่ใบเสร็จ:</strong> 08000159</span>
+                            </div>
+                        </div>
+
+                        <!-- First Table: Product Table (full width) -->
+                        <table class="table table-sm" style="width: 100%; border: 1px solid black; margin-top: 20px;" cellspacing="0" cellpadding="5">
+                            <thead>
+                                <tr style="border: 1px solid black;">
+                                    <th>No.</th>
+                                    <th>ชื่อสินค้า</th>
+                                    <th>จำนวน</th>
+                                    <th>จำนวนเงิน</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.invoice_line_ids" t-as="line">
+                                    <tr style="border: 1px solid black;">
+                                        <td><t t-esc="line.sequence"/></td>
+                                        <td><t t-esc="line.product_id.name"/></td>
+                                        <td style="text-align: right;"><t t-esc="line.quantity"/></td>
+                                        <td style="text-align: right;"><t t-esc="line.price_total"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Second Table: Totals Section (starts from the third column) -->
+                        <table class="table" style="width: 100%; margin-top: 20px;">
+                            <tr>
+                                <td style="width: 66%;"></td>
+                                <td class="text-right" style="width: 17%;">
+                                    <p>จำนวนรวม</p>
+                                    <p>รวมมูลค่าสินค้า</p>
+                                    <p>ภาษีมูลค่าเพิ่ม 7.00%</p>
+                                    <p>จำนวนเงินพิเศษ</p>
+                                    <p><strong>รวมสุทธิ</strong></p>
+                                </td>
+                                <td class="text-right" style="width: 17%;">
+                                    <p><t t-esc="o.amount_untaxed"/></p>
+                                    <p><t t-esc="o.amount_total - o.amount_tax"/></p>
+                                    <p><t t-esc="o.amount_tax"/></p>
+                                    <p>0.00</p>
+                                    <p><strong><t t-esc="o.amount_total"/></strong></p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Total Amount in Words -->
+                        <p style="text-align: center; margin-top: 20px;">สามร้อยสิบห้าบาทถ้วน</p>
+
+                        <!-- Footer -->
+                        <div style="text-align: right; margin-top: 20px;">
+                            <p>ผู้รับเงิน: ____________________________</p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+            </t>
+        </template>
+</odoo>
