@@ -17,6 +17,7 @@
                             <tree string="Recipe Product Lines" editable="bottom">
                                 <field name="recipe_product_id" string="Product"/>
                                 <field name="location_id" string="Location"/>
+                                <field name="uom_id" string="Unit of Measure"/>
                                 <field name="qty_consumed" string="Quantities"/>
                             </tree>
                         </field>
@@ -37,6 +38,7 @@
                             <group>
                                 <field name="recipe_product_id" string="Recipe Product"/>
                                 <field name="location_id" string="Location"/>
+                                <field name="uom_id" string="Unit of Measure"/>
                                 <field name="qty_consumed" string="Quantities"/>
                             </group>
                         </group>
@@ -53,6 +55,7 @@
                 <tree string="Recipe Structure">
                     <field name="recipe_product_id" string="Recipe Product"/>
                     <field name="location_id" string="Location"/>
+                    <field name="uom_id" string="Unit of Measure"/>
                     <field name="qty_consumed" string="Quantities"/>
                 </tree>
             </field>
@@ -96,6 +99,7 @@
                                     <tree string="Recipe Product Lines" editable="bottom">
                                         <field name="wizard_line_product_id" string="Product"/>
                                         <field name="wizard_line_location_id" string="Location"/>
+                                        <field name="wizard_line_uom_id" string="Unit of Measure"/>
                                         <field name="wizard_line_qty_consumed" string="Quantities"/>
                                     </tree>
                                 </field>

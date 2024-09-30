@@ -2,7 +2,7 @@ odoo.define('cd_recipe_material_management.pos_cart_validation', function (requi
     "use strict";
 
     const PosModel = require('point_of_sale.models');
-    const PosScreen = require('point_of_sale.screens');
+    const PosScreen =   require('point_of_sale.screens');
 
     // Extend the existing PosModel to include our validation logic
     const _super_order = PosModel.Order.prototype;

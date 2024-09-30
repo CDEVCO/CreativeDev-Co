@@ -26,6 +26,7 @@ class ProductRecipeLines(models.Model):
     product_tmpl_id = fields.Many2one('product.template', 'Product Template') #connect with one2many field
     recipe_product_id = fields.Many2one('product.template', 'Recipe Product') #Recipe Line Product
     location_id = fields.Many2one('stock.location', 'Location')
+    uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     qty_consumed = fields.Float('Quantities')
 
 class ProductWizard(models.TransientModel):
@@ -45,6 +46,7 @@ class ProductWizard(models.TransientModel):
                 vals = {
                     'wizard_line_product_id': recipe_line.recipe_product_id.id,
                     'wizard_line_location_id': recipe_line.location_id.id,
+                    'wizard_line_uom_id': recipe_line.uom_id.id,
                     'wizard_line_qty_consumed': recipe_line.qty_consumed,
                 }
                 new_lines.append((0, 0, vals))
@@ -58,6 +60,7 @@ class ProductWizard(models.TransientModel):
             recipe_line_commands.append((0, 0, {
                 'recipe_product_id': wizard_recipe_line.wizard_line_product_id.id,
                 'location_id': wizard_recipe_line.wizard_line_location_id.id,
+                'uom_id': wizard_recipe_line.wizard_line_uom_id.id,
                 'qty_consumed': wizard_recipe_line.wizard_line_qty_consumed,
             }))
         product_id.write({'recipe_product_ids': recipe_line_commands})
@@ -71,6 +74,7 @@ class ProductWizardLine(models.TransientModel):
     wizard_id = fields.Many2one('product.wizard', 'Line')
     wizard_line_product_id = fields.Many2one('product.template', 'Recipe Line Product')
     wizard_line_location_id = fields.Many2one('stock.location', 'Recipe Line Location')
+    wizard_line_uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     wizard_line_qty_consumed = fields.Float('Recipe Line Quantities')
 
 
