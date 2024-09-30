@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="inline_form">
+    <template id="kasikorn_inline_form">
         <t t-set="inline_form_values"
            t-value="provider_sudo._kasikorn_get_inline_form_values(
                         amount,
@@ -19,7 +19,7 @@
 
     <template id="express_checkout_form">
         <div name="o_express_checkout_container"
-             t-attf-id="o_kasikorn_express_checkout_container_{{provider_sudo.id}}"
+             t-attf-id="o_stripe_express_checkout_container_{{provider_sudo.id}}"
              t-att-data-provider-id="provider_sudo.id"
              t-att-data-provider-code="provider_sudo.code"
              t-att-data-stripe-publishable-key="provider_sudo._stripe_get_publishable_key()"
